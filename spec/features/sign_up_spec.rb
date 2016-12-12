@@ -12,4 +12,9 @@ feature 'Sign up page' do
     expect(page).to have_content("Welcome James@dix.com")
   end
 
+  scenario "should not allow the same email address to be signed up twice" do
+    sign_up
+    expect{sign_up}.to change(User, :count).by(0)
+  end
+
 end

@@ -8,4 +8,15 @@ feature 'Sign In' do
     expect(page).to have_content 'Welcome James@dix.com'
   end
 
+  scenario("keeps the user on the sign in page if wrong credentials") do
+    visit('/sessions/new')
+    fill_in "email", with: 'james@dix.com'
+    fill_in "password", with: 'wrongpassword'
+    click_button "Sign in"
+
+    expect(current_path).to eq '/sessions/new'
+    expect(page).not_to have_content 'Welcome James@dix.com'
+    expect(page).to have_content 'Wrong password'
+  end
+
 end

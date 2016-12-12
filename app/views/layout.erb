@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>RandBNB</title>
+</head>
+
+<body>
+
+  <% if flash[:error] %>
+    <%= flash[:error] %>
+  <% end %>
+
+  <%= yield %>
+
+</body>
+</html>

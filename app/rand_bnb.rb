@@ -2,9 +2,19 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
 require_relative 'data_mapper_setup'
+require 'sinatra/flash'
 
 class RandBnb < Sinatra::Base
   enable :sessions
+  set :session_secret, 'super secret'
+
+  register Sinatra::Flash
+
+  helpers do
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
+  end
 
   get '/' do
     erb :signup
@@ -18,7 +28,7 @@ class RandBnb < Sinatra::Base
     @user = User.new(name: params[:name], email: params[:email], password: params[:password])
 
     if @user.save
-      @user
+      session[:user_id] = @user.id
       redirect("/dashboard")
     else
       "YOU SHALL NOT PASS"
@@ -27,7 +37,7 @@ class RandBnb < Sinatra::Base
   end
 
   get '/dashboard' do
-    @email = session[:email]
+    current_user
     erb :dashboard
   end
 
@@ -36,8 +46,14 @@ class RandBnb < Sinatra::Base
   end
 
   post '/sessions' do
-    session[:email] = params[:email]
-    redirect("/dashboard")
+    user = User.authenticate(params[:email], params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect("/dashboard")
+    else
+      flash[:error] = "Wrong password"
+      redirect('/sessions/new')
+    end
   end
 
   # start the server if ruby file executed directly

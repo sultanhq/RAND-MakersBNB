@@ -2,7 +2,7 @@ require 'sinatra/base'
 
 class RandBnb < Sinatra::Base
   get '/' do
-    'Hello RandBnb!'
+    redirect 'signup.html'
   end
 
   # start the server if ruby file executed directly

@@ -1,7 +1,7 @@
-RAND-MakersBNB
+#  RAND-MakersBNB
 
 
-# User Stories:
+## User Stories:
 
 As a new User,
 So that I can list my space,
@@ -46,3 +46,10 @@ I need to indicate when that space is unavailable.
 As a hosting User,
 So that I can choose my guests,
 The space will be available until I confirm a booking.
+
+
+## Instructions
+
+* Fork and clone repo,
+* Run ```bundle install``` in the repo root folder,
+* Create two postgres databases named ```randbnb_test``` & ```randbnb_development```,

@@ -13,6 +13,6 @@ feature 'Sign up page' do
     fill_in "password", with: "james123"
     click_button("Sign up")
     expect(page.current_path).to eq("/dashboard")
-    expect(page).to have_content("Welcome James Dix")
-end
+    expect(page).to have_content("Welcome James@dix.com")
+  end
 end

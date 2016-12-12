@@ -1,4 +1,7 @@
+ENV['RACK_ENV'] ||= 'development'
+
 require 'sinatra/base'
+require_relative 'data_mapper_setup'
 
 class RandBnb < Sinatra::Base
   enable :sessions
@@ -11,7 +14,16 @@ class RandBnb < Sinatra::Base
     session[:name] = params[:name]
     session[:email] = params[:email]
     session[:password] = params[:password]
-    redirect("/dashboard")
+
+    @user = User.new(name: params[:name], email: params[:email], password: params[:password])
+
+    if @user.save
+      @user
+      redirect("/dashboard")
+    else
+      "YOU SHALL NOT PASS"
+      redirect('/')
+    end
   end
 
   get '/dashboard' do

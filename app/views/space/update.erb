@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<h1>Please update your space</h1>
+<form action="/space/update" method="post">
+  <input type="text" name="name" placeholder="<%= @space.name%>">
+  <input type='text' name='description' placeholder="<%= @space.description%>">
+  <input type='number' name='price_per_night' placeholder="<%= @space.price_per_night %>">
+  <label>Available from: </label><input type="date" name='available_from' placeholder="<%= @space.available_from %>" >
+  <label>Available to: </label><input type="date" name='available_to' placeholer="<%= @space.available_to%>" >
+  <input type="submit" value="Update space">
+</form>
+
+</html>

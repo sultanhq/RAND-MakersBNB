@@ -84,13 +84,28 @@ class RandBnb < Sinatra::Base
 
     end
 
-
   end
 
   get '/space/host' do
     current_user
     @spaces = Space.all #(user_id: @current_user.id)
     erb :'space/host'
+  end
+
+  post '/space/edit' do
+    session[:space_id] = params[:id]
+    redirect('space/update')
+  end
+
+  get '/space/update' do
+  p  session[:space_id]
+    @space = Space.get(session[:space_id])
+    erb :'space/update'
+  end
+
+  post '/space/update' do
+    p params
+
   end
 
   # start the server if ruby file executed directly

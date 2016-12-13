@@ -12,7 +12,16 @@ feature 'dashboard shows spaces' do
     add_space
     click_button("My spaces")
     page.find('li', :text => "1").click_button("Edit space")
-      expect(current_path).to eq('/space/edit')
+      expect(current_path).to eq('/space/update')
       expect(page).to have_content("Please update your space")
+  end
+  scenario 'changes have been implemented' do
+    sign_up
+    add_space
+    click_button("My spaces")
+    page.find('li', :text => "1").click_button("Edit space")
+    update_space
+    expect(current_path).to eq("/space/host")
+    expect(page).to have_content("Even more comfy than evA")
   end
 end

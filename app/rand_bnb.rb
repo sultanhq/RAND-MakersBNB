@@ -38,6 +38,7 @@ class RandBnb < Sinatra::Base
 
   get '/dashboard' do
     current_user
+    @spaces = Space.all
     erb :dashboard
   end
 

@@ -12,4 +12,5 @@ feature 'Viewing spaces' do
     expect(page).to have_content("2016-12-12")
     expect(page).to have_content("2016-12-30")
   end
+
 end

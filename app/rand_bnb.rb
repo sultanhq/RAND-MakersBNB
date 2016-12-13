@@ -14,6 +14,10 @@ class RandBnb < Sinatra::Base
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
+
+    def search_availability
+      @search_availability ||= session[:search_availability]
+    end
   end
 
   get '/' do
@@ -38,7 +42,16 @@ class RandBnb < Sinatra::Base
 
   get '/dashboard' do
     current_user
-    erb :dashboard
+    if search_availability
+      @spaces = Space.all(:available_from.lte => search_availability,
+        :available_to.gte => search_availability)
+      if @spaces.empty?
+        flash.now[:error] = "Chosen date not available"
+      end
+    else
+      @spaces = Space.all
+    end
+      erb :dashboard
   end
 
   get '/sessions/new' do
@@ -66,6 +79,7 @@ class RandBnb < Sinatra::Base
 
   post '/space/save' do
     current_user
+
     if (params[:available_from] < params[:available_to])
       @space = Space.new(user_id: @current_user.id, name: params[:name],
       description: params[:description], price_per_night: params[:price_per_night],
@@ -77,7 +91,7 @@ class RandBnb < Sinatra::Base
         flash[:error] = "All fields must be completed"
         redirect('/space/new')
       end
-
+      
     else
       flash[:error] = "Cannot have 'to date' before 'from date'"
       redirect('/space/new')
@@ -89,8 +103,13 @@ class RandBnb < Sinatra::Base
 
   get '/space/host' do
     current_user
-    @spaces = Space.all #(user_id: @current_user.id)
+    @spaces = Space.all(user_id: @current_user.id)
     erb :'space/host'
+  end
+
+  post '/space/filter' do
+    session[:search_availability] = params[:search_availability]
+    redirect('/dashboard')
   end
 
   # start the server if ruby file executed directly

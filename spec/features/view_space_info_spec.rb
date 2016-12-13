@@ -10,4 +10,5 @@ feature 'Viewing spaces' do
     expect(page).to have_content("The comfiest room evA")
     expect(page).to have_content("100")
   end
+
 end

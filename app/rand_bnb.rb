@@ -67,7 +67,13 @@ class RandBnb < Sinatra::Base
 
   post '/space/save' do
     current_user
-    @space = Space.new(user_id: @current_user.id, name: params[:name], description: params[:description], price_per_night: params[:price_per_night])
+    @space = Space.new(
+      user_id: @current_user.id,
+      name: params[:name],
+      description: params[:description],
+      price_per_night: params[:price_per_night],
+      available_from: params[:available_from],
+      available_to: params[:available_to])
 
     if @space.save
       redirect('/dashboard')
@@ -80,7 +86,7 @@ class RandBnb < Sinatra::Base
 
   get '/space/host' do
     current_user
-    @spaces = Space.all #(user_id: @current_user.id)
+    @spaces = Space.all(user_id: @current_user.id)
     erb :'space/host'
   end
 

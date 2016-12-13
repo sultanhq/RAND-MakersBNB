@@ -80,25 +80,31 @@ class RandBnb < Sinatra::Base
   post '/space/save' do
     current_user
 
-    if (params[:available_from] < params[:available_to])
-      @space = Space.new(user_id: @current_user.id, name: params[:name],
-      description: params[:description], price_per_night: params[:price_per_night],
-      available_from: params[:available_from], available_to: params[:available_to])
+    @space = Space.new(
+      user_id: @current_user.id,
+      name: params[:name],
+      description: params[:description],
+      price_per_night: params[:price_per_night],
+      available_from: params[:available_from],
+      available_to: params[:available_to])
 
+    avail_from = params[:available_from]
+    avail_to = params[:available_to]
+    
+    if avail_from.empty? || avail_to.empty?
+      flash[:error] = "All fields must be completed"
+      redirect('/space/new')
+    elsif avail_from > avail_to
+      flash[:error] = "Cannot have 'to date' before 'from date'"
+      redirect('/space/new')
+    else
       if @space.save
         redirect('/dashboard')
       else
         flash[:error] = "All fields must be completed"
         redirect('/space/new')
       end
-      
-    else
-      flash[:error] = "Cannot have 'to date' before 'from date'"
-      redirect('/space/new')
-
     end
-
-
   end
 
   get '/space/host' do

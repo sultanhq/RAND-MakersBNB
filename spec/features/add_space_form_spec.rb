@@ -9,12 +9,8 @@ feature 'Adding a space' do
     end
 
     scenario 'User has clicked button add space and fills in the form' do
-      def add_space
       sign_up
-      click_button("Add space")
-      fill_in "Space name", with: "Comfy room"
-      click_button("Save space")
-      end
+      add_space
       expect{add_space}.to change(Space, :count).by(1)
       expect(page.current_path).to eq("/dashboard")
   end

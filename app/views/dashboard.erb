@@ -1,5 +1,9 @@
 Welcome <%= @current_user.email %>
 <br> Spaces <br>
 <form action="/space/new">
-<input type="submit" value="Add space">
+  <input type="submit" value="Add space">
+</form>
+
+<form action="space/host">
+  <input type="submit" value="My spaces">
 </form>

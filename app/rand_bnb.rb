@@ -60,10 +60,21 @@ class RandBnb < Sinatra::Base
     erb :'space/new_space'
   end
 
+  get '/signin' do
+    redirect '/sessions/new'
+  end
+
   post '/space/save' do
+    p params
     current_user
-    Space.create(user_id: @current_user.id, name: params[:name])
+    Space.create(user_id: @current_user.id, name: params[:'Space name'])
     redirect('/dashboard')
+  end
+
+  get '/space/host' do
+    current_user
+    @spaces = Space.all #(user_id: @current_user.id)
+    erb :'space/host'
   end
 
   # start the server if ruby file executed directly

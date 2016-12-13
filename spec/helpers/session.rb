@@ -15,4 +15,10 @@ module SessionHelpers
     click_button("Sign in")
   end
 
+  def add_space
+    click_button("Add space")
+    fill_in "Space name", with: "Comfy room"
+    click_button("Save space")
+  end
+
 end

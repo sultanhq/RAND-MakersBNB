@@ -35,4 +35,18 @@ feature 'Adding a space' do
     expect(page).to have_content("All fields must be completed")
   end
 
+  scenario 'User has not filled in available from date' do
+    sign_up
+    expect{add_space_no_from_date}.to change(Space, :count).by(0)
+    expect(page.current_path).to eq('/space/new')
+    expect(page).to have_content("All fields must be completed")
+  end
+
+  scenario "User has not filled in available to date" do
+    sign_up
+    expect{add_space_no_to_date}.to change(Space, :count).by(0)
+    expect(page.current_path).to eq('/space/new')
+    expect(page).to have_content("All fields must be completed")
+  end
+
 end

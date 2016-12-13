@@ -52,4 +52,22 @@ module SessionHelpers
     click_button("Save")
   end
 
+  def add_space_no_from_date
+    click_button("Add space")
+    fill_in "name", with: "Comfy room"
+    fill_in "description", with: "The comfiest room evA"
+    fill_in "price_per_night", with: "100"
+    fill_in "available_to", with: "2016-12-16"
+    click_button("Save")
+  end
+
+  def add_space_no_to_date
+    click_button("Add space")
+    fill_in "name", with: "Comfy room"
+    fill_in "description", with: "The comfiest room evA"
+    fill_in "price_per_night", with: "100"
+    fill_in "available_from", with: "2016-12-12"
+    click_button("Save")
+  end
+
 end

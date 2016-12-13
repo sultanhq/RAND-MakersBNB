@@ -59,7 +59,7 @@ The space will be available until I confirm a booking.
 ```
 
 ```
-As a renting User,
+As a User,
 So that I can browse available spaces,
 I need a page which shows available spaces
 ```
@@ -80,6 +80,9 @@ I want to see my requests
 As a hosting user,
 So that I can see the requests I've received
 I want to see my requests
+```
+
+```
 ```
 
 

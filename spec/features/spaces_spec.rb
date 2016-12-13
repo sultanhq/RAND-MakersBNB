@@ -6,4 +6,13 @@ feature 'dashboard shows spaces' do
     expect(page.current_path).to eq("/dashboard")
     expect(page).to have_content("Spaces")
   end
+
+  scenario 'update hosts space details' do
+    sign_up
+    add_space
+    click_button("My spaces")
+    page.find('li', :text => "1").click_button("Edit space")
+      expect(current_path).to eq('/space/edit')
+      expect(page).to have_content("Please update your space")
+  end
 end

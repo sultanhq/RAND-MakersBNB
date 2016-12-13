@@ -58,6 +58,31 @@ So that I can choose my guests,
 The space will be available until I confirm a booking.
 ```
 
+```
+As a renting User,
+So that I can browse available spaces,
+I need a page which shows available spaces
+```
+
+```
+As a renting User,
+So that I can see specific details about an available space,
+I need a pace which shows me everything about one space only
+```
+
+```
+As a renting user,
+So that I can see the requests I've made
+I want to see my requests
+```
+
+```
+As a hosting user,
+So that I can see the requests I've received
+I want to see my requests
+```
+
+
 ## Instructions
 
 * Fork and clone repo,

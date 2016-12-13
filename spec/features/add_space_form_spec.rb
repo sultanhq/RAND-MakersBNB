@@ -9,8 +9,10 @@ feature 'Adding a space' do
     end
 
   scenario 'User has clicked button add space and fills in the form' do
-    expect{add_space}.to change(Space, :count).by(1)
-    expect(page.current_path).to eq("/dashboard")
+      sign_up
+      add_space
+      expect{add_space}.to change(Space, :count).by(1)
+      expect(page.current_path).to eq("/dashboard")
   end
 
   scenario 'User has not filled in name' do

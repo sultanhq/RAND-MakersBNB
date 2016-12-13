@@ -60,6 +60,10 @@ class RandBnb < Sinatra::Base
     erb :'space/new_space'
   end
 
+  get '/signin' do
+    redirect '/sessions/new'
+  end
+
   post '/space/save' do
     current_user
     @space = Space.new(user_id: @current_user.id, name: params[:name], description: params[:description], price_per_night: params[:price_per_night])
@@ -70,6 +74,13 @@ class RandBnb < Sinatra::Base
       flash[:error] = "All fields must be completed"
       redirect('/space/new')
     end
+
+  end
+
+  get '/space/host' do
+    current_user
+    @spaces = Space.all #(user_id: @current_user.id)
+    erb :'space/host'
   end
 
   # start the server if ruby file executed directly

@@ -65,10 +65,16 @@ class RandBnb < Sinatra::Base
   end
 
   post '/space/save' do
-    p params
     current_user
-    Space.create(user_id: @current_user.id, name: params[:'Space name'])
-    redirect('/dashboard')
+    @space = Space.new(user_id: @current_user.id, name: params[:name], description: params[:description], price_per_night: params[:price_per_night])
+
+    if @space.save
+      redirect('/dashboard')
+    else
+      flash[:error] = "All fields must be completed"
+      redirect('/space/new')
+    end
+
   end
 
   get '/space/host' do

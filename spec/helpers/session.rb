@@ -16,9 +16,36 @@ module SessionHelpers
   end
 
   def add_space
+    sign_up
     click_button("Add space")
-    fill_in "Space name", with: "Comfy room"
-    click_button("Save space")
+    fill_in "name", with: "Comfy room"
+    fill_in "description", with: "The comfiest room evA"
+    fill_in "price_per_night", with: "100"
+    click_button("Save")
+  end
+
+  def add_space_no_name
+    sign_up
+    click_button("Add space")
+    fill_in "description", with: "The comfiest room evA"
+    fill_in "price_per_night", with: "100"
+    click_button("Save")
+  end
+
+  def add_space_no_description
+    sign_up
+    click_button("Add space")
+    fill_in "name", with: "Comfy room"
+    fill_in "price_per_night", with: "100"
+    click_button("Save")
+  end
+
+  def add_space_no_price
+    sign_up
+    click_button("Add space")
+    fill_in "name", with: "Comfy room"
+    fill_in "description", with: "The comfiest room evA"
+    click_button("Save")
   end
 
 end

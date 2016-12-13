@@ -1,7 +1,14 @@
+<!DOCTYPE html>
+<html>
+
 <h1>Please add new space details</h1>
 <form action="/space/save" method="post">
   <input type="text" name="name" placeholder="Name">
   <input type='text' name='description' placeholder="Description">
   <input type='number' name='price_per_night' placeholder="Price per Night">
+  <label>Available From: </label><input type="date" name='available_from'>
+  <label>Available Until: </label><input type="date" name='available_until'>
   <input type="submit" value="Save">
 </form>
+
+</html>

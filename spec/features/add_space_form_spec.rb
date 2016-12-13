@@ -35,4 +35,9 @@ feature 'Adding a space' do
     expect(page).to have_content("All fields must be completed")
   end
 
+  scenario "user can not enter to-date earlier than from-date" do
+    sign_up
+    expect{add_space_dates_wrong}.to change(Space, :count).by(0)
+    expect(page).to have_content("Cannot have 'to date' before 'from date'")
+  end
 end

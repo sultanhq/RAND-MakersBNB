@@ -8,7 +8,8 @@ class Space
   belongs_to :user
 
   property :id, Serial
-  property :name, String
-
+  property :name, String, required: true
+  property :description, Text, required: true
+  property :price_per_night, Integer, required: true
 
 end

@@ -36,5 +36,22 @@ feature 'dashboard shows spaces' do
     add_space
     expect(page).to have_content("2016-12-16")
   end
-  
+
+  scenario "user can filter by dates for an available date 2016-12-12" do
+    sign_up
+    add_space
+    fill_in "search_availability", with: "2016-12-12"
+    click_button "Search"
+    expect(page).to have_content("Comfy room")
+  end
+
+  scenario "user can filter by dates for an unavailable date 2016-12-18" do
+    sign_up
+    add_space
+    fill_in "search_availability", with: "2016-12-18"
+    click_button "Search"
+    expect(page).not_to have_content("Comfy room")
+    expect(page).to have_content("Chosen date not available")
+  end
+
 end

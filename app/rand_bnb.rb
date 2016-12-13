@@ -14,6 +14,10 @@ class RandBnb < Sinatra::Base
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
+
+    def search_availability
+      @search_availability ||= session[:search_availability]
+    end
   end
 
   get '/' do
@@ -38,8 +42,16 @@ class RandBnb < Sinatra::Base
 
   get '/dashboard' do
     current_user
-    @spaces = Space.all
-    erb :dashboard
+    if search_availability
+      @spaces = Space.all(:available_from.lte => search_availability,
+        :available_to.gte => search_availability)
+      if @spaces.empty?
+        flash.now[:error] = "Chosen date not available"
+      end
+    else
+      @spaces = Space.all
+    end
+      erb :dashboard
   end
 
   get '/sessions/new' do
@@ -88,6 +100,11 @@ class RandBnb < Sinatra::Base
     current_user
     @spaces = Space.all(user_id: @current_user.id)
     erb :'space/host'
+  end
+
+  post '/space/filter' do
+    session[:search_availability] = params[:search_availability]
+    redirect('/dashboard')
   end
 
   # start the server if ruby file executed directly

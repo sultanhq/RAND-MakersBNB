@@ -105,6 +105,7 @@ class RandBnb < Sinatra::Base
         redirect('/space/new')
       end
     end
+
   end
 
   get '/space/host' do
@@ -112,6 +113,47 @@ class RandBnb < Sinatra::Base
     @spaces = Space.all(user_id: @current_user.id)
     erb :'space/host'
   end
+
+  post '/space/edit' do
+    session[:space_id] = params[:id]
+    redirect('space/update')
+  end
+
+  get '/space/update' do
+    p  session[:space_id]
+    @space = Space.get(session[:space_id])
+    erb :'space/update'
+  end
+
+  post '/space/update' do
+    @space = Space.get(session[:space_id])
+    p params
+
+    avail_from = params[:available_from]
+    avail_to = params[:available_to]
+
+    if avail_from.empty? || avail_to.empty?
+      flash[:error] = "All fields must be completed"
+      redirect('/space/update')
+    elsif avail_from > avail_to
+      flash[:error] = "Cannot have 'to date' before 'from date'"
+      redirect('/space/update')
+    else
+      current_user
+      if @space.update(
+        user_id: @current_user.id,
+        name: params[:name],
+        description: params[:description],
+        price_per_night: params[:price_per_night],
+        available_from: params[:available_from],
+        available_to: params[:available_to])
+
+        redirect('/space/host')
+      else
+        flash[:error] = "All fields must be completed"
+        redirect('/space/update')
+      end
+    end
 
   post '/space/filter' do
     session[:search_availability] = params[:search_availability]

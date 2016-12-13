@@ -81,4 +81,13 @@ module SessionHelpers
     click_button("Save")
   end
 
+  def update_space
+    fill_in "name", with: "Comfy room"
+    fill_in "description", with: "Even more comfy than evA"
+    fill_in "price_per_night", with: "50"
+    fill_in "available_from", with: "2016-12-12"
+    fill_in "available_to", with: "2016-12-30"
+    click_button("Update space")
+  end
+
 end

@@ -44,14 +44,14 @@ class RandBnb < Sinatra::Base
     current_user
     if search_availability
       @spaces = Space.all(:available_from.lte => search_availability,
-        :available_to.gte => search_availability)
+      :available_to.gte => search_availability)
       if @spaces.empty?
         flash.now[:error] = "Chosen date not available"
       end
     else
       @spaces = Space.all
     end
-      erb :dashboard
+    erb :dashboard
   end
 
   get '/sessions/new' do
@@ -81,16 +81,16 @@ class RandBnb < Sinatra::Base
     current_user
 
     @space = Space.new(
-      user_id: @current_user.id,
-      name: params[:name],
-      description: params[:description],
-      price_per_night: params[:price_per_night],
-      available_from: params[:available_from],
-      available_to: params[:available_to])
+    user_id: @current_user.id,
+    name: params[:name],
+    description: params[:description],
+    price_per_night: params[:price_per_night],
+    available_from: params[:available_from],
+    available_to: params[:available_to])
 
     avail_from = params[:available_from]
     avail_to = params[:available_to]
-    
+
     if avail_from.empty? || avail_to.empty?
       flash[:error] = "All fields must be completed"
       redirect('/space/new')
@@ -120,14 +120,12 @@ class RandBnb < Sinatra::Base
   end
 
   get '/space/update' do
-    p  session[:space_id]
     @space = Space.get(session[:space_id])
     erb :'space/update'
   end
 
   post '/space/update' do
     @space = Space.get(session[:space_id])
-    p params
 
     avail_from = params[:available_from]
     avail_to = params[:available_to]
@@ -154,6 +152,7 @@ class RandBnb < Sinatra::Base
         redirect('/space/update')
       end
     end
+  end
 
   post '/space/filter' do
     session[:search_availability] = params[:search_availability]

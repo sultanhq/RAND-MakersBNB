@@ -11,4 +11,24 @@ Welcome <%= @current_user.email %>
   <input type="submit" value="My spaces">
 </form>
 
+<form action="space/filter" method="post">
+  <label>Search Availability</label><input type="date" name='search_availability'>
+  <input type="submit" value="Search">
+</form>
+
+<ul id="spaces">
+
+  <% @spaces.each do |space| %>
+
+    <li>
+      Space Name: <%= space.name %>
+      Space description: <%= space.description %>
+      Space price per night: <%= space.price_per_night %>
+      Space avaialable from: <%= space.available_from %>
+      Space available to: <%= space.available_to %>
+    </li>
+
+  <% end %>
+</ul>
+  
 </html>

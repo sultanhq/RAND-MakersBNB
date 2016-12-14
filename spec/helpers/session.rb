@@ -100,4 +100,8 @@ module SessionHelpers
     click_button("Save")
   end
 
+  def make_request
+    page.find('li', :text => "1").click_button("Request")
+  end
+
 end

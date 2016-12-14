@@ -15,7 +15,7 @@ feature 'dashboard shows spaces' do
       expect(current_path).to eq('/space/update')
       expect(page).to have_content("Please update your space")
   end
-  
+
   scenario 'changes have been implemented' do
     sign_up
     add_space
@@ -71,6 +71,15 @@ feature 'dashboard shows spaces' do
     click_button "Search"
     expect(page).not_to have_content("Comfy room")
     expect(page).to have_content("Chosen date not available")
+  end
+
+  scenario "filter defaults to today" do
+    sign_up
+    add_space
+    add_space_not_today
+    click_button "Search"
+    expect(page).not_to have_text("Jenna's room")
+
   end
 
 end

@@ -16,7 +16,7 @@ class RandBnb < Sinatra::Base
     end
 
     def search_availability
-      @search_availability ||= Date.today
+      @search_availability ||= session[:search_availability]
 
       # require'pry';binding.pry
     end
@@ -158,7 +158,6 @@ class RandBnb < Sinatra::Base
 
   post '/space/filter' do
     session[:search_availability] = params[:search_availability]
-    @search_availability = session[:search_availability]
     redirect('/dashboard')
   end
 

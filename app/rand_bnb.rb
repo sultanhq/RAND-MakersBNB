@@ -17,8 +17,6 @@ class RandBnb < Sinatra::Base
 
     def search_availability
       @search_availability ||= session[:search_availability]
-
-      # require'pry';binding.pry
     end
   end
 
@@ -43,6 +41,7 @@ class RandBnb < Sinatra::Base
   end
 
   get '/dashboard' do
+    session[:search_availability] ||= Date.today
     current_user
     if search_availability
       @spaces = Space.all(:available_from.lte => search_availability,

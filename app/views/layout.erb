@@ -10,7 +10,7 @@
 
 
 <body>
-
+<div>
   <% if flash[:error] %>
     <%= flash[:error] %>
   <% end %>
@@ -20,6 +20,6 @@
   <% end %>
 
   <%= yield %>
-
+</div>
 </body>
 </html>

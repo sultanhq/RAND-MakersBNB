@@ -40,7 +40,7 @@ class RandBnb < Sinatra::Base
       redirect("/dashboard")
     else
       "YOU SHALL NOT PASS"
-      redirect('/')
+      redirect('/signup')
     end
   end
 

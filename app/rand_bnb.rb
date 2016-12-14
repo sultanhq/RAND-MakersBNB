@@ -114,7 +114,7 @@ class RandBnb < Sinatra::Base
       redirect('/space/new')
     else
       if @space.save
-        redirect('/dashboard')
+        redirect('/space/host')
       else
         flash[:error] = "All fields must be completed"
         redirect('/space/new')

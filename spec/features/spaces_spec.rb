@@ -89,8 +89,18 @@ feature 'dashboard shows spaces' do
     add_space_not_today
     click_button "Search"
     expect(page).not_to have_text("Jenna's room")
+  end
 
+
+  scenario "filter keeps date user has searched for after search is complete" do
+    sign_up
+    add_space
+    fill_in "search_availability", with: "2016-12-18"
+    click_button "Search"
+    click_button "Search"
+    expect(page).not_to have_content("Comfy room")
 
   end
+
 
 end

@@ -49,7 +49,7 @@ class RandBnb < Sinatra::Base
         flash.now[:error] = "Chosen date not available"
       end
     else
-      @spaces = Space.all
+      @spaces = Space.all(:available_from.lte => Date.today, :available_to.gte => Date.today)
     end
     erb :dashboard
   end

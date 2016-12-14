@@ -21,7 +21,11 @@ class RandBnb < Sinatra::Base
   end
 
   get '/' do
-    erb :signup
+    if @current_user
+      erb :dashboard
+    else
+      erb :signup
+    end
   end
 
   post '/signup' do
@@ -36,7 +40,7 @@ class RandBnb < Sinatra::Base
       redirect("/dashboard")
     else
       "YOU SHALL NOT PASS"
-      redirect('/')
+      redirect('/signup')
     end
   end
 

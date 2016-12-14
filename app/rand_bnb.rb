@@ -28,8 +28,12 @@ class RandBnb < Sinatra::Base
     if @current_user
       redirect '/dashboard'
     else
-      erb :signup
+      redirect '/signup'
     end
+  end
+
+  get '/signup' do
+    erb :signup
   end
 
   post '/signup' do

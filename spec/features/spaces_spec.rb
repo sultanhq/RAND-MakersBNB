@@ -87,6 +87,7 @@ feature 'dashboard shows spaces' do
     sign_up
     add_space
     add_space_not_today
+    visit '/dashboard'
     click_button "Search"
     expect(page).not_to have_text("Jenna's room")
   end

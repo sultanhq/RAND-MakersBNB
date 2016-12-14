@@ -1,7 +1,7 @@
 module SessionHelpers
 
   def sign_up
-    visit '/'
+    visit '/signup'
     fill_in "name", with: "James Dix"
     fill_in "email", with: "James@dix.com"
     fill_in "password", with: "james123"
@@ -23,6 +23,7 @@ module SessionHelpers
     fill_in "available_from", with: "2016-12-12"
     fill_in "available_to", with: "2016-12-16"
     click_button("Save")
+    visit '/dashboard'
   end
 
   def add_space_dates_wrong
@@ -32,8 +33,8 @@ module SessionHelpers
     fill_in "price_per_night", with: "100"
     fill_in "available_from", with: "2016-12-30"
     fill_in "available_to", with: "2016-12-12"
-
     click_button("Save")
+
   end
 
   def add_space_no_name
@@ -43,6 +44,7 @@ module SessionHelpers
     fill_in "available_from", with: "2016-12-12"
     fill_in "available_to", with: "2016-12-16"
     click_button("Save")
+
   end
 
   def add_space_no_description
@@ -61,6 +63,7 @@ module SessionHelpers
     fill_in "available_from", with: "2016-12-12"
     fill_in "available_to", with: "2016-12-16"
     click_button("Save")
+
   end
 
   def add_space_no_from_date
@@ -70,6 +73,7 @@ module SessionHelpers
     fill_in "price_per_night", with: "100"
     fill_in "available_to", with: "2016-12-16"
     click_button("Save")
+
   end
 
   def add_space_no_to_date
@@ -98,6 +102,7 @@ module SessionHelpers
     fill_in "available_from", with: "2017-12-12"
     fill_in "available_to", with: "2017-12-16"
     click_button("Save")
+
   end
 
   def make_request

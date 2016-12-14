@@ -102,6 +102,7 @@ feature 'Requests' do
     add_space
     visit'/dashboard'
     expect{make_request}.to change(Booking, :count).by(1)
+  end
 
   scenario "filter keeps date user has searched for after search is complete" do
     sign_up
@@ -110,8 +111,6 @@ feature 'Requests' do
     click_button "Search"
     click_button "Search"
     expect(page).not_to have_content("Comfy room")
-
-
   end
 
 

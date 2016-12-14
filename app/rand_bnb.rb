@@ -159,6 +159,11 @@ class RandBnb < Sinatra::Base
     redirect('/dashboard')
   end
 
+  post '/request' do
+    flash[:notice] = "Request sent to space owner"
+    redirect('/dashboard')
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end

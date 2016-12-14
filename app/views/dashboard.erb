@@ -19,12 +19,16 @@ Welcome <%= @current_user.email %>
 
   <% @spaces.each do |space| %>
 
-    <li>
+    <li id="<% space.id %>"  >
       Space Name: <%= space.name %>
       Space description: <%= space.description %>
       Space price per night: <%= space.price_per_night %>
       Space avaialable from: <%= space.available_from %>
       Space available to: <%= space.available_to %>
+      <form action='/request' method='post'>
+        <input type="hidden" value="<% space.id %>" name="requested_space_id">
+        <input type='submit' value='Request'>
+      </form>
     </li>
 
   <% end %>

@@ -11,7 +11,8 @@ Welcome <%= @current_user.email %>
 </form>
 
 <form action="space/filter" method="post">
-  <label>Search Availability</label><input type="date" name='search_availability' value='<%=Date.today%>'>
+  <label>Search Availability</label><input type="date" name='search_availability' value='<%= @search_availability %>'>
+
   <input type="submit" value="Search">
 </form>
 

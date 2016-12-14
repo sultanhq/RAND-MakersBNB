@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="icon" href="../images/favicon.ico">
+    <title>RAND-bnb</title>
+  </head>
+  <a href='/'>
+    <img src="../images/logo.jpg">
+  </a>
 
-<head>
-  <title>RandBNB</title>
-</head>
 
 <body>
+
   <div>
     <% if flash[:error] %>
       <%= flash[:error] %>
@@ -28,6 +33,7 @@
 <% end %>
 
   <%= yield %>
-
+  
+</div>
 </body>
 </html>

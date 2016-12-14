@@ -24,8 +24,9 @@ class RandBnb < Sinatra::Base
   end
 
   get '/' do
+    current_user
     if @current_user
-      erb :dashboard
+      redirect '/dashboard'
     else
       erb :signup
     end

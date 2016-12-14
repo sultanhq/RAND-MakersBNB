@@ -6,7 +6,7 @@ feature 'Requests page' do
     add_space
     make_request
     click_button("My requests")
-    expect(page).to have_content("Request #1")
+    expect(page).to have_content("Request number: 1")
   end
 
 

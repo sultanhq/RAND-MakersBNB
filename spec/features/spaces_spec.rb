@@ -73,6 +73,7 @@ feature 'dashboard shows spaces' do
     expect(page).to have_content("Chosen date not available")
   end
 
+
   scenario "user can request to rent a space" do
     sign_up
     add_space
@@ -80,6 +81,16 @@ feature 'dashboard shows spaces' do
     page.find('li', :text => "1").click_button("Request")
     expect(page).to have_content("Request sent to space owner")
     expect(page.current_path).to eq('/dashboard')
+  end
+  
+  scenario "filter defaults to today" do
+    sign_up
+    add_space
+    add_space_not_today
+    click_button "Search"
+    expect(page).not_to have_text("Jenna's room")
+
+
   end
 
 end

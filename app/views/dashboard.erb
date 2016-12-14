@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 Welcome <%= @current_user.email %>
 <br> Spaces <br>
 <form action="/space/new">
@@ -12,7 +11,7 @@ Welcome <%= @current_user.email %>
 </form>
 
 <form action="space/filter" method="post">
-  <label>Search Availability</label><input type="date" name='search_availability'>
+  <label>Search Availability</label><input type="date" name='search_availability' value='<%=Date.today%>'>
   <input type="submit" value="Search">
 </form>
 

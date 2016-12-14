@@ -90,4 +90,14 @@ module SessionHelpers
     click_button("Update space")
   end
 
+  def add_space_not_today
+    click_button("Add space")
+    fill_in "name", with: "Jenna's room"
+    fill_in "description", with: "Second comfiest room evA"
+    fill_in "price_per_night", with: "100"
+    fill_in "available_from", with: "2017-12-12"
+    fill_in "available_to", with: "2017-12-16"
+    click_button("Save")
+  end
+
 end

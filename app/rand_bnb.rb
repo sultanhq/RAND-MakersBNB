@@ -183,6 +183,12 @@ class RandBnb < Sinatra::Base
     redirect('/dashboard')
   end
 
+  get '/requests' do
+    @requests_made = Booking.all(user_id: current_user.id)
+    erb :'request/requests'
+  end
+
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end

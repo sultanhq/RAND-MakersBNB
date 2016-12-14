@@ -1,0 +1,17 @@
+<ul id="requests_made">
+  Requests:
+  <br>
+  <% @requests_made.map do |request| %>
+  <% if  request.booking_confirmed == false %>
+    Request number: <%= request.id %>
+    Booking date: <%= request.booking_date %>
+    Space name: <% space = Space.all(id: request.space_id) %>
+    <% space.map do |space| %> <%= space.name %> <% end %>
+
+    <br>
+
+  <% end %>
+  <% end %>
+
+
+</ul>

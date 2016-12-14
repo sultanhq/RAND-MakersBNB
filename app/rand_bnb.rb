@@ -4,9 +4,12 @@ require 'sinatra/base'
 require_relative 'data_mapper_setup'
 require 'sinatra/flash'
 
+
 class RandBnb < Sinatra::Base
   enable :sessions
   set :session_secret, 'super secret'
+
+  use Rack::MethodOverride
 
   register Sinatra::Flash
 
@@ -68,6 +71,12 @@ class RandBnb < Sinatra::Base
       flash[:error] = "Wrong password"
       redirect('/sessions/new')
     end
+  end
+
+  delete '/sessions' do
+    session.clear
+    flash[:notice] = "Thank you for using RAND-bnb, see you again soon!"
+    redirect ('/sessions/new')
   end
 
   get '/space/new' do

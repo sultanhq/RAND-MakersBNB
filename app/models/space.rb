@@ -9,7 +9,6 @@ class Space
   belongs_to :user
   has n, :bookings
 
-
   property :id, Serial
   property :name, String, required: true
   property :description, Text, required: true

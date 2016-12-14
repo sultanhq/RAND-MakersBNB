@@ -4,9 +4,12 @@ require 'sinatra/base'
 require_relative 'data_mapper_setup'
 require 'sinatra/flash'
 
+
 class RandBnb < Sinatra::Base
   enable :sessions
   set :session_secret, 'super secret'
+
+  use Rack::MethodOverride
 
   register Sinatra::Flash
 
@@ -17,13 +20,15 @@ class RandBnb < Sinatra::Base
 
     def search_availability
       @search_availability ||= session[:search_availability]
-
-      # require'pry';binding.pry
     end
   end
 
   get '/' do
-    erb :signup
+    if @current_user
+      erb :dashboard
+    else
+      erb :signup
+    end
   end
 
   post '/signup' do
@@ -38,11 +43,12 @@ class RandBnb < Sinatra::Base
       redirect("/dashboard")
     else
       "YOU SHALL NOT PASS"
-      redirect('/')
+      redirect('/signup')
     end
   end
 
   get '/dashboard' do
+    session[:search_availability] ||= Date.today
     current_user
     if search_availability
       @spaces = Space.all(:available_from.lte => search_availability,
@@ -69,6 +75,12 @@ class RandBnb < Sinatra::Base
       flash[:error] = "Wrong password"
       redirect('/sessions/new')
     end
+  end
+
+  delete '/sessions' do
+    session.clear
+    flash[:notice] = "Thank you for using RAND-bnb, see you again soon!"
+    redirect ('/sessions/new')
   end
 
   get '/space/new' do

@@ -82,15 +82,24 @@ feature 'dashboard shows spaces' do
     expect(page).to have_content("Request sent to space owner")
     expect(page.current_path).to eq('/dashboard')
   end
-  
+
   scenario "filter defaults to today" do
     sign_up
     add_space
     add_space_not_today
     click_button "Search"
     expect(page).not_to have_text("Jenna's room")
+  end
 
+end
 
+feature 'Requests' do
+
+  scenario 'Bookings table increase by one when a request is made' do
+    sign_up
+    add_space
+    visit'/dashboard'
+    expect{make_request}.to change(Booking, :count).by(1)
   end
 
 end

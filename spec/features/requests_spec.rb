@@ -84,7 +84,6 @@ end
       add_space
       make_request
       visit '/dashboard'
-      require'pry';binding.pry
       expect(page).to have_content("You have unconfirmed bookings")
     end
 end

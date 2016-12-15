@@ -213,7 +213,6 @@ class RandBnb < Sinatra::Base
 
   get '/bookings' do
     @bookings_made = Booking.all(user_id: current_user.id)
-    p @bookings_made
     @my_spaces = []
     Space.all(user_id: current_user.id).each do |space|
       if space.user_id = current_user.id

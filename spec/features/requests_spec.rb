@@ -46,7 +46,6 @@ feature 'Requests page' do
     sign_up
     add_space
     add_space2
-    save_and_open_page
     click_button("Sign Out")
     sign_up2
     make_request

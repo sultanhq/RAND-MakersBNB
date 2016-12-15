@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
-Welcome, <%= @current_user.name.split.first.capitalize %>!
+<h1>
+Welcome <% if @new_user == true %> to Rand-Bnb, <%= @current_user.name.split.first.capitalize %>!
+<% else %>
+back to Rand-Bnb, <%= @current_user.name.split.first.capitalize %>!
+<% end %>
+</h1>
 <br> Spaces <br>
 <form action="/space/new">
   <input type="submit" value="Add space">

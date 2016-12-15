@@ -66,9 +66,19 @@ class RandBnb < Sinatra::Base
     session[:search_availability] ||= Date.today
     current_user
     flash_request_check
+
     if search_availability
       @spaces = Space.all(:available_from.lte => search_availability,
       :available_to.gte => search_availability)
+
+      # @spaces.each do |item|
+      #   item.bookings.each do |booking|
+      #     if booking.booking_confirmed == false && booking.booking_date != search_availability
+      #       @spaces << booking
+      #     end
+      #   end
+      # end
+
       if @spaces.empty?
         flash.now[:error] = "Chosen date not available"
       end

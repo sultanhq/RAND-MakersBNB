@@ -94,4 +94,19 @@ feature 'dashboard shows spaces' do
     expect(page).not_to have_text("Jenna's room")
   end
 
+  scenario "user cannot see spaces for which their chosen date is not available" do
+  sign_up
+  add_space
+  sign_out
+  sign_up2
+  make_request
+  sign_out
+  sign_in
+  click_button("My requests")
+  accept_request
+  sign_out
+  sign_in2
+  expect(page).not_to have_content("Comfy room")
+end
+
 end

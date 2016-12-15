@@ -30,4 +30,13 @@ end
       click_button "Search"
       expect(page).not_to have_content("Comfy room")
     end
+
+    scenario "Page flashes message when they have outstanding requests" do
+      sign_up
+      add_space
+      make_request
+      visit '/dashboard'
+      require'pry';binding.pry
+      expect(page).to have_content("You have unconfirmed bookings")
+    end
 end

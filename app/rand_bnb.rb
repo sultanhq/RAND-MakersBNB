@@ -21,6 +21,16 @@ class RandBnb < Sinatra::Base
     def search_availability
       @search_availability ||= session[:search_availability]
     end
+
+    def flash_request_check
+      result = Booking.all(booking_confirmed: false)
+        result.each do |booking|
+          if (Space.get(booking.space_id).user_id == current_user.id)
+            flash[:notice] = "You have unconfirmed bookings"
+          end
+        end
+
+    end
   end
 
   get '/' do
@@ -55,6 +65,7 @@ class RandBnb < Sinatra::Base
   get '/dashboard' do
     session[:search_availability] ||= Date.today
     current_user
+    flash_request_check
     if search_availability
       @spaces = Space.all(:available_from.lte => search_availability,
       :available_to.gte => search_availability)

@@ -77,6 +77,8 @@ feature 'dashboard shows spaces' do
   scenario "user can request to rent a space" do
     sign_up
     add_space
+    click_button 'Sign Out'
+    sign_up2
     visit('/dashboard')
     page.find('li', :text => "1").click_button("Request")
     expect(page).to have_content("Request sent to space owner")

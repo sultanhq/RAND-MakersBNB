@@ -2,14 +2,18 @@
 
   Requests Made:
   <br>
-  <% @requests_made.map do |request| %>
-    <% if request.booking_confirmed == false %>
-      Request number: <%= request.id %>
-      Booking date: <%= request.booking_date %>
-      Space name: <% space = Space.all(id: request.space_id) %>
-      <% space.map do |space| %> <%= space.name %> <% end %>
-      <br>
-    <% end %>
+  <% i=0 %>
+  <% @requests_made.map do |request|  %>
+  <% if  request.booking_confirmed == false %>
+    Request number: <%= i += 1 %>
+    Booking date: <%= request.booking_date %>
+    Space name: <% space = Space.all(id: request.space_id) %>
+    <% space.map do |space| %> <%= space.name %> <% end %>
+
+    <br>
+
+  <% end %>
+
   <% end %>
   <br>
 </ul>
@@ -18,14 +22,15 @@
 
   Requests Received:
   <br>
+  <% i=0 %>
   <% @all_requests.each do |request| %>
     <% if @my_spaces.include?(request.space_id) %>
       <% if request.booking_confirmed == false %>
         <li id='<%=request.id%>'>
-          Request number: <%= request.id %>
-          Booking date: <%= request.booking_date %>
-          Space name: <% space = Space.all(id: request.space_id) %>
-          <% space.map do |space| %> <%= space.name %> <% end %>
+         Request number: <%= i += 1 %>
+        Booking date: <%= request.booking_date %>
+        Space name: <% space = Space.all(id: request.space_id) %>
+        <% space.map do |space| %> <%= space.name %> <% end %>
 
           <form action='/booking_accept' method='post'>
             <input type='hidden' value='<%=request.id%>' name='id'>

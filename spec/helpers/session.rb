@@ -8,6 +8,14 @@ module SessionHelpers
     click_button("Sign up")
   end
 
+  def sign_up2
+    visit '/signup'
+    fill_in "name", with: "Jenna"
+    fill_in "email", with: "jenna@test.com"
+    fill_in "password", with: "jenna123"
+    click_button("Sign up")
+  end
+
   def sign_in
     visit '/sessions/new'
     fill_in "email", with: "James@dix.com"
@@ -22,6 +30,17 @@ module SessionHelpers
     fill_in "price_per_night", with: "100"
     fill_in "available_from", with: "2016-12-12"
     fill_in "available_to", with: "2016-12-16"
+    click_button("Save")
+    visit '/dashboard'
+  end
+
+  def add_space2
+    click_button("Add space")
+    fill_in "name", with: "Slightly comfy room"
+    fill_in "description", with: "The second most comfiest room evA"
+    fill_in "price_per_night", with: "50"
+    fill_in "available_from", with: "2016-12-14"
+    fill_in "available_to", with: "2016-12-29"
     click_button("Save")
     visit '/dashboard'
   end
@@ -106,7 +125,15 @@ module SessionHelpers
   end
 
   def make_request
-    page.find('li', :text => "1").click_button("Request")
+    within('li#1') do
+      click_button("Request")
+    end
+  end
+
+  def make_request2
+    within('li#2') do
+      click_button("Request")
+    end
   end
 
 end

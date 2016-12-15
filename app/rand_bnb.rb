@@ -190,6 +190,14 @@ class RandBnb < Sinatra::Base
 
   get '/requests' do
     @requests_made = Booking.all(user_id: current_user.id)
+    @my_spaces = []
+    Space.all(user_id: current_user.id).each do |space|
+      if space.user_id = current_user.id
+        @my_spaces << space.id
+      end
+    end
+    p @my_spaces
+    @all_requests = Booking.all
     erb :'request/requests'
   end
 

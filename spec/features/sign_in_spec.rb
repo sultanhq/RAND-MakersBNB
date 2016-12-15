@@ -3,7 +3,6 @@ require 'spec_helper'
 feature 'Sign In' do
 
   scenario("shows the user the sign in page") do
-    p @new_user
     sign_up
     expect{sign_in}.to change(User, :count).by(0)
     expect(current_path).to eq '/dashboard'

@@ -16,5 +16,4 @@ feature 'Sign up page' do
     sign_up
     expect{sign_up}.to change(User, :count).by(0)
   end
-
 end

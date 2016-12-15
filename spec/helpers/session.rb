@@ -136,4 +136,16 @@ module SessionHelpers
     end
   end
 
+  def accept_request
+    within('li#1') do
+      click_button("Accept")
+    end
+  end
+
+  def reject_request
+    within('li#1') do
+      click_button("Reject")
+    end
+  end
+
 end

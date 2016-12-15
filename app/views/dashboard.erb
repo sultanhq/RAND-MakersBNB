@@ -13,11 +13,15 @@ Welcome <%= @current_user.email %>
   <input type="submit" value="My requests">
 </form>
 
+<form action="/bookings">
+  <input type="submit" value="My bookings">
+</form>
+
 <form action="space/filter" method="post">
   <label>Search Availability</label><input type="date" name='search_availability' value='<%= @search_availability %>'>
-
   <input type="submit" value="Search">
 </form>
+
 
 <ul id="spaces">
 

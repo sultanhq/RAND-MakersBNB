@@ -26,7 +26,7 @@ class RandBnb < Sinatra::Base
       result = Booking.all(booking_confirmed: false)
         result.each do |booking|
           if (Space.get(booking.space_id).user_id == current_user.id)
-            flash[:notice] = "You have unconfirmed bookings"
+            flash[:booking] = "You have unconfirmed bookings"
           end
         end
 

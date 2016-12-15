@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="icon" href="../images/favicon.ico">
-    <title>RAND-bnb</title>
-  </head>
-  <a href='/'>
-    <img src="../images/logo.jpg">
-  </a>
+<head>
+  <link rel="icon" href="../images/favicon.ico">
+  <title>RAND-bnb</title>
+</head>
+<a href='/'>
+  <img src="../images/logo.jpg">
+</a>
 
 
 <body>
 
-  <div>
-    <% if flash[:error] %>
+  <font color="red">
+    <div>
+      <% if flash[:error] %>
       <%= flash[:error] %>
-    <% end %>
+      <% end %>
+    </div>
+  </font>
+  <font color="green">
+    <div>
+      <% if flash[:booking] %>
+      <%= flash[:booking] %>
+      <% end %>
+    </div>
+  </font>
+  <font color="blue">
+    <div>
+      <% if flash[:notice] %>
+      <%= flash[:notice] %>
+      <% end %>
+    </div>
+  </font>
+
+  <% if current_user %>
+  <div>
+    <form action='/sessions' method ='post'>
+      <input type='hidden' name='_method' value='delete'>
+      <input type='submit' value='Sign Out'>
+    </form>
   </div>
-
-<div>
-  <% if flash[:notice] %>
-    <%= flash[:notice] %>
   <% end %>
-</div>
-
-<% if current_user %>
-<div>
-  <form action='/sessions' method ='post'>
-    <input type='hidden' name='_method' value='delete'>
-    <input type='submit' value='Sign Out'>
-  </form>
-</div>
-<% end %>
 
   <%= yield %>
-  
+
 </div>
 </body>
 </html>

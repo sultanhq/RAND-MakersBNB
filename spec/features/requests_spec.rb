@@ -9,7 +9,7 @@ feature 'Requests page' do
     expect(page).to have_content("Request number: 1")
   end
 
-  xscenario 'a user can see the booking id of requests they have received' do
+  scenario 'a user can see the booking id of requests they have received' do
     sign_up
     add_space
     sign_up2
@@ -46,7 +46,6 @@ feature 'Requests page' do
     sign_up
     add_space
     add_space2
-    save_and_open_page
     click_button("Sign Out")
     sign_up2
     make_request

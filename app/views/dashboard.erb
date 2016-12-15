@@ -25,12 +25,24 @@ Welcome, <%= @current_user.name.split.first.capitalize %>!
 
 <ul id="spaces">
 
-  <% @spaces.each do |space| %>
-    <% space.bookings.each do |booking| %>
-      <% if booking.booking_confirmed == false %>
+  <% @spaces.each do |item| %>
+    <% item.bookings.each do |booking| %>
+    <%   if booking.booking_confirmed == true%>
+      <%   @spaces.delete(item)%>
+
+      <% @spaces.save %>
+    <%   end%>
+  <%   end%>
+<%   end%>
+
+
+
+
+
+  <% @spaces.map do |space| %>
+
 
         <li id="<%=space.id %>">
-          <%= booking.booking_confirmed %>
           Space Name: <%= space.name %>
           Space description: <%= space.description %>
           Space price per night: <%= space.price_per_night %>
@@ -42,8 +54,6 @@ Welcome, <%= @current_user.name.split.first.capitalize %>!
           </form>
         </li>
 
-      <% end %>
-    <% end %>
   <% end %>
 
 </ul>

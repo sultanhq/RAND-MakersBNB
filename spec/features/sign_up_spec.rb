@@ -9,12 +9,11 @@ feature 'Sign up page' do
   scenario "user can submit a sign up form" do
     expect{sign_up}.to change(User, :count).by(1)
     expect(page.current_path).to eq("/dashboard")
-    expect(page).to have_content("Welcome James")
+    expect(page).to have_content("Welcome to Rand-Bnb, James")
   end
 
   scenario "should not allow the same email address to be signed up twice" do
     sign_up
     expect{sign_up}.to change(User, :count).by(0)
   end
-
 end

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-Welcome <%= @current_user.name.split.first %>
+Welcome, <%= @current_user.name.split.first.capitalize %>!
 <br> Spaces <br>
 <form action="/space/new">
   <input type="submit" value="Add space">

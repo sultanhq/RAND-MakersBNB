@@ -1,15 +1,97 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="icon" href="../images/favicon.ico">
+    <link rel="icon" href="../images/favicon.ico" class="icon">
     <title>RAND-bnb</title>
+    <style>
+body{
+  background-color: grey;
+  margin-top: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+    ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: groove;
+    border-width:5px;
+    border-color: orange;
+    background-color: grey;
+
+}
+
+li.button_topnav {
+    float: right;
+    background-color: grey;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.b {
+  padding: 0px;
+  margin: 0px;
+}
+li a:hover {
+    background-color: orange;
+}
+    </style>
   </head>
-  <a href='/'>
-    <img src="../images/logo.jpg">
-  </a>
 
 
 <body>
+    <div clas="topnav_div">
+      <ul class="topnav">
+        <b href='/'>
+          <img src="../images/logo.jpg">
+        </b>
+        <% if current_user %>
+        <li class="button_topnav">
+          <a>
+            <form action='/sessions' method ='post' >
+            <input type='hidden' name='_method' value='delete'>
+            <input type='submit' value='Sign Out'>
+            </form>
+        </a>
+      </li>
+      <% end %>
+        <li class="button_topnav">
+          <a>
+          <form action="/space/new" >
+            <input type="submit" value="Add space">
+          </form>
+        </li>
+      </a>
+      <li class="button_topnav">
+        <a>
+          <form action="/space/host" >
+            <input type="submit" value="My spaces">
+          </form>
+      </a>
+    </li>
+    <li class="button_topnav">
+      <a>
+          <form action="/requests" >
+            <input type="submit" value="My requests">
+          </form>
+      </a>
+    </li>
+    <li class="button_topnav">
+      <a>
+        <form action="/signin" >
+          <input type="submit" value="Sign in">
+        </form>
+      </a>
+    </li>
+      </ul>
+    </div>
+
 
   <div>
     <% if flash[:error] %>
@@ -33,7 +115,7 @@
 <% end %>
 
   <%= yield %>
-  
+
 </div>
 </body>
 </html>

@@ -11,6 +11,7 @@ gem 'sinatra-flash'
 group :test do
 
   gem 'rspec'
+  gem 'coveralls' , require: false
   gem 'rspec-sinatra'
   gem 'pry'
   gem 'capybara'

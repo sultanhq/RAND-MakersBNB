@@ -14,12 +14,23 @@ class RandBnb < Sinatra::Base
   register Sinatra::Flash
 
   helpers do
+
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
 
     def search_availability
       @search_availability ||= session[:search_availability]
+    end
+
+    def flash_request_check
+      result = Booking.all(booking_confirmed: false)
+      result.each do |booking|
+        if (Space.get(booking.space_id).user_id == current_user.id)
+          flash[:booking] = "You have unconfirmed bookings"
+        end
+      end
+
     end
   end
 
@@ -42,28 +53,36 @@ class RandBnb < Sinatra::Base
     session[:password] = params[:password]
 
     @user = User.new(name: params[:name], email: params[:email], password: params[:password])
-
     if @user.save
       session[:user_id] = @user.id
+      session[:new_user] = true
       redirect("/dashboard")
     else
-      "YOU SHALL NOT PASS"
       redirect('/signup')
     end
   end
 
   get '/dashboard' do
+    @new_user = session[:new_user]
     session[:search_availability] ||= Date.today
     current_user
+    flash_request_check
+
     if search_availability
       @spaces = Space.all(:available_from.lte => search_availability,
       :available_to.gte => search_availability)
+
       if @spaces.empty?
         flash.now[:error] = "Chosen date not available"
       end
+
     else
       @spaces = Space.all(:available_from.lte => Date.today, :available_to.gte => Date.today)
+
     end
+
+
+
     erb :dashboard
   end
 
@@ -75,6 +94,7 @@ class RandBnb < Sinatra::Base
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
+      session[:new_user] = false
       redirect("/dashboard")
     else
       flash[:error] = "Wrong password"
@@ -190,10 +210,41 @@ class RandBnb < Sinatra::Base
 
   get '/requests' do
     @requests_made = Booking.all(user_id: current_user.id)
+    @my_spaces = []
+    Space.all(user_id: current_user.id).each do |space|
+      if space.user_id = current_user.id
+        @my_spaces << space.id
+      end
+    end
+    @all_requests = Booking.all
     erb :'request/requests'
   end
 
+  get '/bookings' do
+    @bookings_made = Booking.all(user_id: current_user.id)
+    @my_spaces = []
+    Space.all(user_id: current_user.id).each do |space|
+      if space.user_id = current_user.id
+        @my_spaces << space.id
+      end
+    end
+    @all_bookings = Booking.all
+    erb :'booking/bookings'
+  end
+
+  post '/booking_accept' do
+    booking = Booking.all(id: params[:id])
+    booking.update(:booking_confirmed => true)
+    redirect '/dashboard'
+  end
+
+  post '/booking_reject' do
+    booking = Booking.all(id: params[:id])
+    booking.destroy
+    redirect '/dashboard'
+  end
 
   # start the server if ruby file executed directly
   run! if app_file == $0
+
 end

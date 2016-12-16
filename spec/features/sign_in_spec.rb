@@ -6,7 +6,7 @@ feature 'Sign In' do
     sign_up
     expect{sign_in}.to change(User, :count).by(0)
     expect(current_path).to eq '/dashboard'
-    expect(page).to have_content 'Welcome James@dix.com'
+    expect(page).to have_content 'Welcome back to Rand-Bnb, James'
   end
 
   scenario("keeps the user on the sign in page if wrong credentials") do
@@ -16,7 +16,7 @@ feature 'Sign In' do
     click_button "Sign in"
 
     expect(current_path).to eq '/sessions/new'
-    expect(page).not_to have_content 'Welcome James@dix.com'
+    expect(page).not_to have_content 'Welcome James Dix'
     expect(page).to have_content 'Wrong password'
   end
 

@@ -1,0 +1,32 @@
+<ul id="bookings_made">
+  Bookings Made:
+  <br>
+  <% @bookings_made.map do |booking| %>
+    <% if booking.booking_confirmed == true %>
+      Booking number: <%= booking.id %>
+      Booking date: <%= booking.booking_date %>
+      Space name: <% space = Space.all(id: booking.space_id) %>
+      <% space.map do |space| %> <%= space.name %> <% end %>
+      <br>
+      <% end %>
+  <% end %>
+  <br>
+</ul>
+
+<ul id="bookings_received">
+  Bookings Received:
+  <br>
+  <% @all_bookings.each do |booking| %>
+    <% if @my_spaces.include?(booking.space_id) %>
+      <% if booking.booking_confirmed == true %>
+        <li id='<%=booking.id%>'>
+          Booking number: <%= booking.id %>
+          Booking date: <%= booking.booking_date %>
+          Space name: <% space = Space.all(id: booking.space_id) %>
+          <% space.map do |space| %> <%= space.name %> <% end %>
+        </li>
+      <% end %>
+    <% end %>
+    <br>
+  <% end %>
+</ul>

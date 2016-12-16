@@ -44,7 +44,6 @@ li a:hover {
     </style>
   </head>
 
-
 <body>
     <div clas="topnav_div">
       <ul class="topnav">
@@ -66,8 +65,8 @@ li a:hover {
           <form action="/space/new" >
             <input type="submit" value="Add space">
           </form>
+          </a>
         </li>
-      </a>
       <li class="button_topnav">
         <a>
           <form action="/space/host" >
@@ -90,25 +89,40 @@ li a:hover {
         </form>
       </a>
     </li>
-    <% end %>
-      </ul>
-    </div>
+    <% end %>   
 
 
-  <div>
-    <% if flash[:error] %>
+  <font color="red">
+    <div>
+      <% if flash[:error] %>
       <%= flash[:error] %>
-    <% end %>
+      <% end %>
+    </div>
+  </font>
+  <font color="green">
+    <div>
+      <% if flash[:booking] %>
+      <%= flash[:booking] %>
+      <% end %>
+    </div>
+  </font>
+  <font color="blue">
+    <div>
+      <% if flash[:notice] %>
+      <%= flash[:notice] %>
+      <% end %>
+    </div>
+  </font>
+
+  <% if current_user %>
+  <div>
+    <form action='/sessions' method ='post'>
+      <input type='hidden' name='_method' value='delete'>
+      <input type='submit' value='Sign Out'>
+    </form>
   </div>
-
-<div>
-  <% if flash[:notice] %>
-    <%= flash[:notice] %>
   <% end %>
-</div>
-
   <%= yield %>
 
-</div>
 </body>
 </html>

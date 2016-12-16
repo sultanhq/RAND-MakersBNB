@@ -1,3 +1,12 @@
+require 'coveralls'
+require 'simplecov'
+
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+Coveralls.wear!
+
 ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', 'app/rand_bnb.rb')
@@ -26,7 +35,7 @@ RSpec.configure do |config|
 
   # Everything in this block runs once after each individual test
   config.after(:each) do
-    DatabaseCleaner.clean
+    DatabaseCleaner.clean_with(:truncation)
   end
 
   config.expect_with :rspec do |expectations|

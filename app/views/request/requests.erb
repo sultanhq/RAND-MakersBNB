@@ -9,7 +9,9 @@
     Request number: <%= i += 1 %>
     Booking date: <%= request.booking_date %>
     Space name: <% space = Space.all(id: request.space_id) %>
-    <% space.map do |space| %> <%= space.name %> <% end %>
+    <% space.map do |space| %> <%= space.name %>
+    Hosts name: <%= User.get(space.user_id).name %>
+    <% end %>
   </li>
     <br>
 
@@ -30,6 +32,7 @@
         Booking date: <%= request.booking_date %>
         Space name: <% space = Space.all(id: request.space_id) %>
         <% space.map do |space| %> <%= space.name %> <% end %>
+        Requesters name: <%= User.get(request.user_id).name %>
 
           <form action='/booking_accept' method='post'>
             <input type='hidden' value='<%=request.id%>' name='id'>

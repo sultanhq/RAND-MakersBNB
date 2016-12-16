@@ -71,8 +71,9 @@ class RandBnb < Sinatra::Base
     if search_availability
       @spaces = Space.all(:available_from.lte => search_availability,
       :available_to.gte => search_availability)
+ 
+      if @spaces.empty? && @new_user == false
 
-      if @spaces.empty?
         flash.now[:error] = "Chosen date not available"
       end
 
@@ -235,13 +236,13 @@ class RandBnb < Sinatra::Base
   post '/booking_accept' do
     booking = Booking.all(id: params[:id])
     booking.update(:booking_confirmed => true)
-    redirect '/dashboard'
+    redirect '/requests'
   end
 
   post '/booking_reject' do
     booking = Booking.all(id: params[:id])
     booking.destroy
-    redirect '/dashboard'
+    redirect '/requests'
   end
 
   # start the server if ruby file executed directly

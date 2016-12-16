@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="icon" href="../images/favicon.ico" class="icon">
-    <title>RAND-bnb</title>
-    <style>
-body{
-  background-color: white;
-  margin-top: auto;
-  margin-right: auto;
-  margin-left: auto;
-}
-    ul.topnav {
+<head>
+  <link rel="icon" href="../images/favicon.ico" class="icon">
+  <title>RAND-bnb</title>
+  <style>
+  body{
+    background-color: white;
+    margin-top: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  ul.topnav {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -20,103 +20,110 @@ body{
     border-color: orange;
     background-color: white;
 
-}
+  }
 
-li.button_topnav {
+  li.button_topnav {
     float: right;
     background-color: purple;
-}
+  }
 
-li a {
+  li a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-}
-.b {
-  padding: 0px;
-  margin: 0px;
-}
-li a:hover {
+  }
+  .b {
+    padding: 0px;
+    margin: 0px;
+  }
+  li a:hover {
     background-color: orange;
-}
-    </style>
-  </head>
+  }
+  </style>
+</head>
 
 <body>
-    <div clas="topnav_div">
-      <ul class="topnav">
-        <b href='/'>
-          <img src="../images/logo.jpg">
-        </b>
-        <% if current_user  %>
-        <li class="button_topnav">
-          <a>
-            <form action='/sessions' method ='post' >
+  <div clas="topnav_div">
+    <ul class="topnav">
+      <b href='/'>
+        <img src="../images/logo.jpg">
+      </b>
+      <% if current_user  %>
+      <li class="button_topnav">
+        <a>
+          <form action='/sessions' method ='post' >
             <input type='hidden' name='_method' value='delete'>
             <input type='submit' value='Sign Out'>
-            </form>
+          </form>
         </a>
       </li>
       <% end %>
-        <li class="button_topnav">
-          <a>
+      <li class="button_topnav">
+        <a>
+          <form action="/bookings">
+            <input type="submit" value="My bookings">
+          </form>
+        </a>
+      </li>      
+      <li class="button_topnav">
+        <a>
           <form action="/space/new" >
             <input type="submit" value="Add space">
           </form>
-          </a>
-        </li>
+        </a>
+      </li>
       <li class="button_topnav">
         <a>
           <form action="/space/host" >
             <input type="submit" value="My spaces">
           </form>
-      </a>
-    </li>
-    <li class="button_topnav">
-      <a>
+        </a>
+      </li>
+      <li class="button_topnav">
+        <a>
           <form action="/requests" >
             <input type="submit" value="My requests">
           </form>
-      </a>
-    </li>
-    <% if current_user === false %>
-    <li class="button_topnav">
-      <a>
-        <form action="/signin" >
-          <input type="submit" value="Sign in">
-        </form>
-      </a>
-    </li>
-    <% end %>
-  </ul>
-
-
-  <font color="red">
-    <div>
-      <% if flash[:error] %>
-      <%= flash[:error] %>
+        </a>
+      </li>
+      <% if current_user === false %>
+      <li class="button_topnav">
+        <a>
+          <form action="/signin" >
+            <input type="submit" value="Sign in">
+          </form>
+        </a>
+      </li>
       <% end %>
-    </div>
-  </font>
-  <font color="green">
-    <div>
-      <% if flash[:booking] %>
-      <%= flash[:booking] %>
-      <% end %>
-    </div>
-  </font>
-  <font color="blue">
-    <div>
-      <% if flash[:notice] %>
-      <%= flash[:notice] %>
-      <% end %>
-    </div>
-  </font>
+    </ul>
 
-  
-  <%= yield %>
 
-</body>
-</html>
+    <font color="red">
+      <div>
+        <% if flash[:error] %>
+        <%= flash[:error] %>
+        <% end %>
+      </div>
+    </font>
+    <font color="green">
+      <div>
+        <% if flash[:booking] %>
+        <%= flash[:booking] %>
+        <% end %>
+      </div>
+    </font>
+    <font color="blue">
+      <div>
+        <% if flash[:notice] %>
+        <%= flash[:notice] %>
+        <% end %>
+      </div>
+    </font>
+
+
+    <%= yield %>
+
+  </body>
+  </html>

@@ -41,7 +41,7 @@ class RandBnb < Sinatra::Base
     if search_availability
       @spaces = Space.all(:available_from.lte => search_availability,
       :available_to.gte => search_availability)
-      if @spaces.empty? && @new_user == false
+      if @spaces.empty?
         flash.now[:error] = "Chosen date not available"
       end
     else

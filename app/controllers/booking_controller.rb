@@ -15,13 +15,13 @@ class RandBnb < Sinatra::Base
   post '/booking_accept' do
     booking = Booking.all(id: params[:id])
     booking.update(:booking_confirmed => true)
-    redirect '/dashboard'
+    redirect '/requests'
   end
 
   post '/booking_reject' do
     booking = Booking.all(id: params[:id])
     booking.destroy
-    redirect '/dashboard'
+    redirect '/requests'
   end
 
 end

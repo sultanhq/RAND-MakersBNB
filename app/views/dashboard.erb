@@ -30,21 +30,37 @@ back to Rand-Bnb, <%= @current_user.name.split.first.capitalize %>!
 
 <ul id="spaces">
 
-  <% @spaces.each do |space| %>
+  <% @spaces.each do |item| %>
+    <% item.bookings.each do |booking| %>
+    <%   if booking.booking_confirmed == true%>
+      <%   @spaces.delete(item)%>
 
-    <li id="<%=space.id %>">
-      Space Name: <%= space.name %>
-      Space description: <%= space.description %>
-      Space price per night: <%= space.price_per_night %>
-      Space available from: <%= space.available_from %>
-      Space available to: <%= space.available_to %>
-      <form action='/request' method='post'>
-        <input type="hidden" value="<%= space.id %>" name="requested_space_id">
-        <input type='submit' value='Request'>
-      </form>
-    </li>
+      <% @spaces.save %>
+    <%   end%>
+  <%   end%>
+<%   end%>
+
+
+
+
+
+  <% @spaces.map do |space| %>
+
+
+        <li id="<%=space.id %>">
+          Space Name: <%= space.name %>
+          Space description: <%= space.description %>
+          Space price per night: <%= space.price_per_night %>
+          Space available from: <%= space.available_from %>
+          Space available to: <%= space.available_to %>
+          <form action='/request' method='post'>
+            <input type="hidden" value="<%= space.id %>" name="requested_space_id">
+            <input type='submit' value='Request'>
+          </form>
+        </li>
 
   <% end %>
+
 </ul>
 
 </html>

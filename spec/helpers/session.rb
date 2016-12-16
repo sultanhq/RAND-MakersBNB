@@ -23,6 +23,13 @@ module SessionHelpers
     click_button("Sign in")
   end
 
+  def sign_in2
+    visit '/sessions/new'
+    fill_in "email", with: "jenna@test.com"
+    fill_in "password", with: "jenna123"
+    click_button("Sign in")
+  end
+
   def add_space
     click_button("Add space")
     fill_in "name", with: "Comfy room"
@@ -146,6 +153,10 @@ module SessionHelpers
     within('li#1') do
       click_button("Reject")
     end
+  end
+
+  def sign_out
+    click_button("Sign Out")
   end
 
 end

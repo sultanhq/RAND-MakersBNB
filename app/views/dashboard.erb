@@ -6,22 +6,21 @@
   back to Rand-Bnb, <%= @current_user.name.split.first.capitalize %>!
   <% end %>
 </h1>
-<br> Spaces <br>
-
 <form action="space/filter" method="post">
   <label>Search Availability</label><input type="date" name='search_availability' value='<%= @search_availability %>'>
   <input type="submit" value="Search">
 </form>
 
 <ul id="spaces">
+  <h3> Spaces </h3>
 
   <% @spaces.each do |item| %>
-    <% item.bookings.each do |booking| %>
-      <% if booking.booking_confirmed == true%>
-        <% @spaces.delete(item)%>
-        <% @spaces.save %>
-      <% end%>
-    <% end%>
+  <% item.bookings.each do |booking| %>
+  <% if booking.booking_confirmed == true%>
+  <% @spaces.delete(item)%>
+  <% @spaces.save %>
+  <% end%>
+  <% end%>
   <% end%>
 
   <% @spaces.map do |space| %>

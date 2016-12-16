@@ -2,22 +2,6 @@
 <html>
 Welcome <%= @current_user.email %>
 <br> Spaces <br>
-<form action="/space/new">
-  <input type="submit" value="Add space">
-</form>
-
-<form action="space/host">
-  <input type="submit" value="My spaces">
-</form>
-<form action="/requests">
-  <input type="submit" value="My requests">
-</form>
-
-<form action="space/filter" method="post">
-  <label>Search Availability</label><input type="date" name='search_availability' value='<%= @search_availability %>'>
-
-  <input type="submit" value="Search">
-</form>
 
 <ul id="spaces">
 

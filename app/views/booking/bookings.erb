@@ -1,20 +1,25 @@
 <ul id="bookings_made">
+  <h3>My Bookings</h3>
   Bookings Made:
+  <br>
   <br>
   <% @bookings_made.map do |booking| %>
     <% if booking.booking_confirmed == true %>
+    <li id='<%=booking.id%>'>
       Booking number: <%= booking.id %>
       Booking date: <%= booking.booking_date %>
       Space name: <% space = Space.all(id: booking.space_id) %>
       <% space.map do |space| %> <%= space.name %> <% end %>
       <br>
       <% end %>
+    </li>
   <% end %>
   <br>
 </ul>
 
 <ul id="bookings_received">
   Bookings Received:
+  <br>
   <br>
   <% @all_bookings.each do |booking| %>
     <% if @my_spaces.include?(booking.space_id) %>
@@ -27,6 +32,6 @@
         </li>
       <% end %>
     <% end %>
-    <br>
+
   <% end %>
 </ul>

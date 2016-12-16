@@ -13,8 +13,9 @@ feature 'Sign In' do
     visit('/sessions/new')
     fill_in "email", with: 'james@dix.com'
     fill_in "password", with: 'wrongpassword'
-    click_button "Sign in"
-
+    within ('form#sign_in') do
+      click_button "Sign in"
+    end
     expect(current_path).to eq '/sessions/new'
     expect(page).not_to have_content 'Welcome James Dix'
     expect(page).to have_content 'Wrong password'

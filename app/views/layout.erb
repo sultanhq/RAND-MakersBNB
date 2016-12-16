@@ -59,7 +59,6 @@
           </form>
         </a>
       </li>
-      <% end %>
       <li class="button_topnav">
         <a>
           <form action="/bookings">
@@ -88,7 +87,8 @@
           </form>
         </a>
       </li>
-      <% if current_user == false %>
+
+      <% else %>
       <li class="button_topnav">
         <a>
           <form action="/signin" >
@@ -96,7 +96,16 @@
           </form>
         </a>
       </li>
+      <li class="button_topnav">
+        <a>
+          <form action="/signup" >
+            <input type="submit" value="Sign up">
+          </form>
+        </a>
+      </li>
       <% end %>
+
+
     </ul>
 
 

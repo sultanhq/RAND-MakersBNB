@@ -85,4 +85,31 @@ end
       visit '/dashboard'
       expect(page).to have_content("You have unconfirmed bookings")
     end
+
+    scenario "Host can see the Requesters Name in 'my requests' page" do
+      sign_up
+      add_space
+      sign_up2
+      make_request
+      click_button("Sign Out")
+      sign_in
+      click_button("My requests")
+      within ('ul#requests_received') do
+        expect(page).to have_content("Requesters name: Jenna")
+      end
+    end
+
+    scenario "Requester can see the hosts name in 'my requests' page" do
+      sign_up
+      add_space
+      sign_up2
+      make_request
+      click_button("Sign Out")
+      sign_in2
+      click_button("My requests")
+      within ('ul#requests_made') do
+        expect(page).to have_content("Hosts name: James Dix")
+      end
+    end
+
 end

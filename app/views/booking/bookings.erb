@@ -9,7 +9,9 @@
       Booking number: <%= booking.id %>
       Booking date: <%= booking.booking_date %>
       Space name: <% space = Space.all(id: booking.space_id) %>
-      <% space.map do |space| %> <%= space.name %> <% end %>
+      <% space.map do |space| %> <%= space.name %>
+      Hosts name: <%= User.get(space.user_id).name %>
+      <% end %>
       <br>
       <% end %>
     </li>
@@ -29,6 +31,7 @@
           Booking date: <%= booking.booking_date %>
           Space name: <% space = Space.all(id: booking.space_id) %>
           <% space.map do |space| %> <%= space.name %> <% end %>
+          Requesters name: <%= User.get(booking.user_id).name %>
         </li>
       <% end %>
     <% end %>

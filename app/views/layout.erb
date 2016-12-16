@@ -24,7 +24,7 @@ body{
 
 li.button_topnav {
     float: right;
-    background-color: white;
+    background-color: purple;
 }
 
 li a {
@@ -81,7 +81,7 @@ li a:hover {
           </form>
       </a>
     </li>
-    <% if current_user == true%>
+    <% if current_user === false %>
     <li class="button_topnav">
       <a>
         <form action="/signin" >
@@ -89,7 +89,8 @@ li a:hover {
         </form>
       </a>
     </li>
-    <% end %>   
+    <% end %>
+  </ul>
 
 
   <font color="red">
@@ -114,14 +115,7 @@ li a:hover {
     </div>
   </font>
 
-  <% if current_user %>
-  <div>
-    <form action='/sessions' method ='post'>
-      <input type='hidden' name='_method' value='delete'>
-      <input type='submit' value='Sign Out'>
-    </form>
-  </div>
-  <% end %>
+  
   <%= yield %>
 
 </body>

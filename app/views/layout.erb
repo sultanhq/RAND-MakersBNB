@@ -5,7 +5,7 @@
     <title>RAND-bnb</title>
     <style>
 body{
-  background-color: grey;
+  background-color: white;
   margin-top: auto;
   margin-right: auto;
   margin-left: auto;
@@ -18,13 +18,13 @@ body{
     border: groove;
     border-width:5px;
     border-color: orange;
-    background-color: grey;
+    background-color: white;
 
 }
 
 li.button_topnav {
     float: right;
-    background-color: grey;
+    background-color: white;
 }
 
 li a {
@@ -51,7 +51,7 @@ li a:hover {
         <b href='/'>
           <img src="../images/logo.jpg">
         </b>
-        <% if current_user %>
+        <% if current_user  %>
         <li class="button_topnav">
           <a>
             <form action='/sessions' method ='post' >
@@ -82,6 +82,7 @@ li a:hover {
           </form>
       </a>
     </li>
+    <% if current_user == true%>
     <li class="button_topnav">
       <a>
         <form action="/signin" >
@@ -89,6 +90,7 @@ li a:hover {
         </form>
       </a>
     </li>
+    <% end %>
       </ul>
     </div>
 
